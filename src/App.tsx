@@ -20,7 +20,7 @@ function App() {
   }
 
   useEffect(() => {
-    fetch("https://rest-api-for-blog-production.up.railway.app", {
+    fetch("https://rest-api-for-blog-production.up.railway.app/posts", {
       mode: "cors",
     })
       .then(function (response) {

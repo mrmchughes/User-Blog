@@ -1,4 +1,5 @@
 import React from "react";
+import PostCard from "../components/PostCard";
 
 interface Post {
   _id: string;
@@ -26,7 +27,7 @@ const HomePage = ({ posts }: HomePageProps) => {
         {posts.map((post) => {
           return (
             <div key={post._id}>
-              <p>{post.title}</p>
+              <PostCard post={post}></PostCard>
             </div>
           );
         })}

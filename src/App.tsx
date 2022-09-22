@@ -36,7 +36,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage posts={posts} />} />
-        <Route path="*" element={<p> There is nothing here!</p>} />
+        <Route path="*" element={<p> There is nothing here!!</p>} />
       </Routes>
     </BrowserRouter>
   );

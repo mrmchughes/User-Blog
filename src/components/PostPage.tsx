@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CommentBox from "../components/CommentBox";
+import { useForm } from "react-hook-form";
 
 interface Post {
   _id: string;
@@ -38,9 +39,36 @@ const PostPage = ({ posts }: PostPageProps) => {
       .then(function (response) {
         setComments(response);
       });
-  }, [comments]);
+  });
 
   const { id } = useParams();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState,
+    formState: { isSubmitSuccessful },
+  } = useForm({ defaultValues: { username: "", message: "" } });
+
+  const onSubmit = (data: any) => {
+    setComments([...comments, data]);
+    fetch(`https://rest-api-for-blog-production.up.railway.app/posts/${id}`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(data),
+    });
+  };
+
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({ username: "", message: "" });
+    }
+  }, [formState, reset]);
 
   return (
     <div>
@@ -59,23 +87,14 @@ const PostPage = ({ posts }: PostPageProps) => {
 
             <br />
             <div>
-              <form>
-                <label>
-                  Username:
-                  <input
-                    type="text"
-                    name="username"
-                    placeholder="Enter Your Username Here"
-                  ></input>
-                </label>
-                <label>
-                  Message:
-                  <input
-                    type="text"
-                    name="message"
-                    placeholder="Enter Your Comment Here"
-                  ></input>
-                </label>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  type="text"
+                  placeholder="username"
+                  {...register("username", {})}
+                />
+                <textarea {...register("message", {})} />
+
                 <input type="submit" value="Submit" />
               </form>
             </div>

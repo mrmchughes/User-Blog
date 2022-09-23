@@ -29,7 +29,7 @@ function App() {
       .then(function (response) {
         setPosts(response);
       });
-  }, [posts]);
+  }, []);
 
   return (
     <BrowserRouter>

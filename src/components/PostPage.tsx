@@ -17,7 +17,7 @@ interface PostPageProps {
 
 const PostPage = ({ posts }: PostPageProps) => {
   const [comments, setComments] = useState<Comment[]>([]);
-
+  //comments being stored in individual BlogPage states might works out when it comes to new comments being added?
   interface Comment {
     post: Object;
     user: String;
@@ -38,7 +38,7 @@ const PostPage = ({ posts }: PostPageProps) => {
       .then(function (response) {
         setComments(response);
       });
-  }, [posts]);
+  }, [comments]);
 
   const { id } = useParams();
 
@@ -54,15 +54,31 @@ const PostPage = ({ posts }: PostPageProps) => {
             <p>{post.message}</p>
             <h2>Comments:</h2>
             {comments.map((comment, index) => (
-              <div key={index}>
-                <div>{comment.message}</div>
-                <div>{comment.user}</div>
-              </div>
+              <CommentBox key={index} comment={comment} />
             ))}
 
             <br />
-            <div>User Name Input Goes Here</div>
-            <div>Comment Input Goes Here</div>
+            <div>
+              <form>
+                <label>
+                  Username:
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Enter Your Username Here"
+                  ></input>
+                </label>
+                <label>
+                  Message:
+                  <input
+                    type="text"
+                    name="message"
+                    placeholder="Enter Your Comment Here"
+                  ></input>
+                </label>
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
           </div>
         ))}
     </div>

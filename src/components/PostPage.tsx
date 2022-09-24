@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CommentBox from "../components/CommentBox";
 import { useForm } from "react-hook-form";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 interface Post {
   _id: string;
@@ -88,14 +90,24 @@ const PostPage = ({ posts }: PostPageProps) => {
             <br />
             <div>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <input
+                <TextField
+                  label="Username"
+                  variant="outlined"
                   type="text"
-                  placeholder="username"
+                  placeholder="Username"
                   {...register("username", {})}
                 />
-                <textarea {...register("message", {})} />
+                <TextField
+                  label="Message"
+                  multiline
+                  rows={4}
+                  placeholder="Message"
+                  {...register("message", {})}
+                />
 
-                <input type="submit" value="Submit" />
+                <Button variant="contained" type="submit">
+                  Submit Comment
+                </Button>
               </form>
             </div>
           </div>

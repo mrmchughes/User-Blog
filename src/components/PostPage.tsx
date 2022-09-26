@@ -14,19 +14,36 @@ interface Post {
   message: string;
 }
 
-interface PostPageProps {
-  posts: Post[];
+interface Comment {
+  post: Object;
+  user: String;
+  timestamp: String;
+  message: String;
 }
 
-const PostPage = ({ posts }: PostPageProps) => {
+const PostPage = () => {
+  const [post, setPost] = useState<Post>({
+    _id: "",
+    isPublished: true,
+    title: "",
+    user: "",
+    timestamp: "",
+    message: "",
+  });
+
   const [comments, setComments] = useState<Comment[]>([]);
-  //comments being stored in individual BlogPage states might works out when it comes to new comments being added?
-  interface Comment {
-    post: Object;
-    user: String;
-    timestamp: String;
-    message: String;
-  }
+
+  useEffect(() => {
+    fetch(`https://rest-api-for-blog-production.up.railway.app/posts/${id}`, {
+      mode: "cors",
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (response) {
+        setPost(response);
+      });
+  }, []);
 
   useEffect(() => {
     fetch(
@@ -41,7 +58,7 @@ const PostPage = ({ posts }: PostPageProps) => {
       .then(function (response) {
         setComments(response);
       });
-  });
+  }, [comments]);
 
   const { id } = useParams();
 
@@ -55,15 +72,19 @@ const PostPage = ({ posts }: PostPageProps) => {
 
   const onSubmit = (data: any) => {
     setComments([...comments, data]);
-    fetch(`https://rest-api-for-blog-production.up.railway.app/posts/${id}`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
 
-      body: JSON.stringify(data),
-    });
+    const newComment = JSON.stringify(data);
+
+    fetch(
+      `https://rest-api-for-blog-production.up.railway.app/posts/${id}/comments`,
+      {
+        method: "post",
+        body: newComment,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -74,44 +95,46 @@ const PostPage = ({ posts }: PostPageProps) => {
 
   return (
     <div>
-      {posts
-        .filter((post) => post._id === id)
-        .map((post, index) => (
-          <div key={index}>
-            <h1>{post.title}</h1>
-            <h2>{post.user}</h2>
-            <p>{post.timestamp}</p>
-            <p>{post.message}</p>
-            <h2>Comments:</h2>
-            {comments.map((comment, index) => (
-              <CommentBox key={index} comment={comment} />
-            ))}
+      <div>
+        <h1>{post.title}</h1>
+        <h2>{post.user}</h2>
+        <p>{post.timestamp}</p>
+        <p>{post.message}</p>
+      </div>
+      <br />
 
-            <br />
-            <div>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <TextField
-                  label="Username"
-                  variant="outlined"
-                  type="text"
-                  placeholder="Username"
-                  {...register("username", {})}
-                />
-                <TextField
-                  label="Message"
-                  multiline
-                  rows={4}
-                  placeholder="Message"
-                  {...register("message", {})}
-                />
-
-                <Button variant="contained" type="submit">
-                  Submit Comment
-                </Button>
-              </form>
-            </div>
-          </div>
+      <div>
+        <h2>Comments:</h2>
+        {comments.map((comment, index) => (
+          <CommentBox key={index} comment={comment} />
         ))}
+      </div>
+      <br />
+
+      <form>
+        <TextField
+          label="Username"
+          variant="outlined"
+          type="text"
+          placeholder="Username"
+          {...register("username", {})}
+        />
+        <TextField
+          label="Message"
+          multiline
+          rows={4}
+          placeholder="Message"
+          {...register("message", {})}
+        />
+
+        <Button
+          variant="contained"
+          type="submit"
+          onClick={handleSubmit(onSubmit)}
+        >
+          Submit Comment
+        </Button>
+      </form>
     </div>
   );
 };

@@ -39,7 +39,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
 
-        <Route path="/posts/:id" element={<PostPage posts={posts} />} />
+        <Route path="/posts/:id" element={<PostPage />} />
         <Route path="*" element={<p> There is nothing here!!</p>} />
       </Routes>
     </BrowserRouter>

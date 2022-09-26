@@ -14,8 +14,10 @@ interface CommentBoxProps {
 const CommentBox = ({ comment }: CommentBoxProps) => {
   return (
     <div>
+      <p>
+        Sent by {comment.user} at: {comment.timestamp}
+      </p>
       <p>{comment.message}</p>
-      <p>{comment.user}</p>
     </div>
   );
 };

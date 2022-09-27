@@ -27,7 +27,7 @@ const HomePage = ({ posts }: HomePageProps) => {
         {posts.map((post) => {
           return (
             <div key={post._id}>
-              <PostCard post={post}></PostCard>
+              <PostCard post={post} />
             </div>
           );
         })}

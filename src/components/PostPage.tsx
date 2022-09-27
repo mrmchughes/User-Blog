@@ -34,6 +34,14 @@ const PostPage = () => {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
+    fetchedPost();
+  }, []);
+
+  useEffect(() => {
+    fetchedComments();
+  }, [comments]);
+
+  const fetchedPost = () => {
     fetch(`https://rest-api-for-blog-production.up.railway.app/posts/${id}`, {
       mode: "cors",
     })
@@ -43,9 +51,9 @@ const PostPage = () => {
       .then(function (response) {
         setPost(response);
       });
-  }, []);
+  };
 
-  useEffect(() => {
+  const fetchedComments = () => {
     fetch(
       `https://rest-api-for-blog-production.up.railway.app/posts/${id}/comments`,
       {
@@ -58,7 +66,7 @@ const PostPage = () => {
       .then(function (response) {
         setComments(response);
       });
-  }, [comments]);
+  };
 
   const { id } = useParams();
 

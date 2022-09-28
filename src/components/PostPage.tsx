@@ -125,14 +125,14 @@ const PostPage = () => {
           variant="outlined"
           type="text"
           placeholder="Username"
-          {...register("username", {})}
+          {...register("username", { required: true })}
         />
         <TextField
           label="Message"
           multiline
           rows={4}
           placeholder="Message"
-          {...register("message", {})}
+          {...register("message", { required: true })}
         />
 
         <Button

@@ -75,7 +75,7 @@ const PostPage = () => {
     handleSubmit,
     reset,
     formState,
-    formState: { isSubmitSuccessful },
+    formState: { errors, isSubmitSuccessful },
   } = useForm({ defaultValues: { username: "", message: "" } });
 
   const onSubmit = (data: any) => {
@@ -125,15 +125,44 @@ const PostPage = () => {
           variant="outlined"
           type="text"
           placeholder="Username"
-          {...register("username", { required: true })}
+          {...register("username", {
+            required: true,
+            minLength: 8,
+            maxLength: 30,
+            pattern: /^[a-zA-Z0-9]+$/,
+          })}
         />
+        {errors.username?.type === "required" && (
+          <span role="alert">Please enter a username</span>
+        )}
+        {errors.username?.type === "minLength" && (
+          <span role="alert">Username must be at least 8 characters</span>
+        )}
+        {errors.username?.type === "maxLength" && (
+          <span role="alert">Username can only be up to 30 characters</span>
+        )}
+        {errors.username?.type === "pattern" && (
+          <span role="alert">
+            Username must only include alpha-numeric characters, and no spaces
+          </span>
+        )}
+
         <TextField
           label="Message"
           multiline
           rows={4}
           placeholder="Message"
-          {...register("message", { required: true })}
+          {...register("message", {
+            required: true,
+            maxLength: 280,
+          })}
         />
+        {errors.message?.type === "required" && (
+          <span role="alert">Please enter a message</span>
+        )}
+        {errors.message?.type === "maxLength" && (
+          <span role="alert">Message can only be up to 280 characters</span>
+        )}
 
         <Button
           variant="contained"

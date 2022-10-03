@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 interface Post {
   _id: string;
@@ -21,7 +22,9 @@ const PostCard = ({ post }: PostCardProps) => {
       <h2>{post.user}</h2>
       <br />
       <p>{post.timestamp}</p>
-      <Link to={`posts/${post._id}`}>View Post</Link>
+      <Button variant="contained" href={`posts/${post._id}`}>
+        View Post
+      </Button>
     </div>
   );
 };

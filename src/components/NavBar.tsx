@@ -12,6 +12,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import Switch from "@mui/material/Switch";
 
 interface Props {
   /**
@@ -22,9 +25,23 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
 
 const NavBar = (props: Props) => {
+  const [auth, setAuth] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -34,19 +51,53 @@ const NavBar = (props: Props) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={auth}
+              onChange={handleChange}
+              aria-label="login switch"
+            />
+          }
+          label={auth ? "Logout" : "Login"}
+        />
+      </FormGroup>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Blog Name Here
       </Typography>
       <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      {!auth && (
+        <List>
+          <ListItemButton component="a" href="/" sx={{ textAlign: "center" }}>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+          <ListItemButton
+            component="a"
+            href="/signup"
+            sx={{ textAlign: "center" }}
+          >
+            <ListItemText primary="Sign Up" />
+          </ListItemButton>
+          <ListItemButton
+            component="a"
+            href="/login"
+            sx={{ textAlign: "center" }}
+          >
+            <ListItemText primary="Login" />
+          </ListItemButton>
+        </List>
+      )}
+      {auth && (
+        <List>
+          <ListItemButton component="a" href="/" sx={{ textAlign: "center" }}>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+          <ListItemButton component="a" href="" sx={{ textAlign: "center" }}>
+            <ListItemText primary="Log Out" />
+          </ListItemButton>
+        </List>
+      )}
     </Box>
   );
 
@@ -56,6 +107,18 @@ const NavBar = (props: Props) => {
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar component="nav">
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={auth}
+                onChange={handleChange}
+                aria-label="login switch"
+              />
+            }
+            label={auth ? "Logout" : "Login"}
+          />
+        </FormGroup>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -71,15 +134,29 @@ const NavBar = (props: Props) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            Blog Title Here
           </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
+          {!auth && (
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              <Button href="/" sx={{ color: "#fff" }}>
+                Home
               </Button>
-            ))}
-          </Box>
+              <Button href="/signup" sx={{ color: "#fff" }}>
+                Sign Up
+              </Button>
+              <Button href="/login" sx={{ color: "#fff" }}>
+                Login
+              </Button>
+            </Box>
+          )}
+          {auth && (
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              <Button href="/" sx={{ color: "#fff" }}>
+                Home
+              </Button>
+              <Button sx={{ color: "#fff" }}>Log Out</Button>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
       <Box component="nav">

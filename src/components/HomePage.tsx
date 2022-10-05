@@ -1,5 +1,6 @@
 import React from "react";
 import PostCard from "../components/PostCard";
+import Box from "@mui/material/Box";
 
 interface Post {
   _id: string;
@@ -16,7 +17,7 @@ interface HomePageProps {
 
 const HomePage = ({ posts }: HomePageProps) => {
   return (
-    <div>
+    <Box component="main">
       <div>
         <p>I'm Michael, welcome to my Blog!</p>
         <p>
@@ -32,7 +33,7 @@ const HomePage = ({ posts }: HomePageProps) => {
           );
         })}
       </div>
-    </div>
+    </Box>
   );
 };
 

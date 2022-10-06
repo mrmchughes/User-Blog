@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+interface LoginPageProps {
+  auth: boolean;
+  handleChange: () => void;
+}
+
+const LoginPage = ({ auth, handleChange }: LoginPageProps) => {
   const navigate = useNavigate();
 
   const {
@@ -16,10 +21,13 @@ const LoginPage = () => {
   });
 
   const onSubmit = (data: any) => {
+    console.log(data);
+
     fetch("https://rest-api-for-blog-production.up.railway.app/login", {
-      method: "post",
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
     })
@@ -27,7 +35,9 @@ const LoginPage = () => {
         return response.json();
       })
       .then(function (response) {
-        console.log(response.user);
+        localStorage.setItem("token", response.token);
+        handleChange();
+        console.log(localStorage.getItem("token"));
       });
   };
 

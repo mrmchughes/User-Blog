@@ -7,21 +7,21 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
+import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router-dom";
 
-const NavBar = () => {
-  const [auth, setAuth] = useState(false);
+interface NavBarProps {
+  auth: boolean;
+  handleChange: () => void;
+}
+
+const NavBar = ({ auth, handleChange }: NavBarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
-  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -35,32 +35,61 @@ const NavBar = () => {
       <Divider />
       {!auth && (
         <List>
-          <ListItemButton component="a" href="/" sx={{ textAlign: "center" }}>
-            <ListItemText primary="Home" />
-          </ListItemButton>
-          <ListItemButton
-            component="a"
-            href="/signup"
-            sx={{ textAlign: "center" }}
-          >
-            <ListItemText primary="Sign Up" />
-          </ListItemButton>
-          <ListItemButton
-            component="a"
-            href="/login"
-            sx={{ textAlign: "center" }}
-          >
-            <ListItemText primary="Login" />
-          </ListItemButton>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={RouterLink}
+              to="/"
+              sx={{ textAlign: "center" }}
+            >
+              <ListItemText primary="Home" />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem disablePadding>
+            <ListItemButton
+              component={RouterLink}
+              to="/signup"
+              sx={{ textAlign: "center" }}
+            >
+              <ListItemText primary="Sign Up" />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem disablePadding>
+            <ListItemButton
+              component={RouterLink}
+              to="/login"
+              sx={{ textAlign: "center" }}
+            >
+              <ListItemText primary="Log In" />
+            </ListItemButton>
+          </ListItem>
         </List>
       )}
       {auth && (
         <List>
-          <ListItemButton component="a" href="/" sx={{ textAlign: "center" }}>
-            <ListItemText primary="Home" />
+          <ListItemButton
+            component={RouterLink}
+            to="/"
+            sx={{ textAlign: "center" }}
+          >
+            Home
           </ListItemButton>
-          <ListItemButton component="a" href="" sx={{ textAlign: "center" }}>
-            <ListItemText primary="Log Out" />
+          <ListItemButton
+            onClick={() => {
+              fetch(
+                `https://rest-api-for-blog-production.up.railway.app/logout`,
+                {
+                  mode: "cors",
+                }
+              ).then(function () {
+                localStorage.clear();
+                handleChange();
+              });
+            }}
+            sx={{ textAlign: "center" }}
+          >
+            Log Out
           </ListItemButton>
         </List>
       )}
@@ -69,18 +98,6 @@ const NavBar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? "Logout" : "Login"}
-        />
-      </FormGroup>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -101,23 +118,59 @@ const NavBar = () => {
           </Typography>
           {!auth && (
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Button href="/" sx={{ color: "#fff" }}>
+              <Button
+                component={RouterLink}
+                to="/"
+                color="inherit"
+                sx={{ textAlign: "center" }}
+              >
                 Home
               </Button>
-              <Button href="/signup" sx={{ color: "#fff" }}>
+              <Button
+                component={RouterLink}
+                to="/signup"
+                color="inherit"
+                sx={{ textAlign: "center" }}
+              >
                 Sign Up
               </Button>
-              <Button href="/login" sx={{ color: "#fff" }}>
-                Login
+              <Button
+                component={RouterLink}
+                to="/login"
+                color="inherit"
+                sx={{ textAlign: "center" }}
+              >
+                Log In
               </Button>
             </Box>
           )}
           {auth && (
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Button href="/" sx={{ color: "#fff" }}>
+              <Button
+                component={RouterLink}
+                to="/"
+                color="inherit"
+                sx={{ textAlign: "center" }}
+              >
                 Home
               </Button>
-              <Button sx={{ color: "#fff" }}>Log Out</Button>
+              <Button
+                onClick={() => {
+                  fetch(
+                    `https://rest-api-for-blog-production.up.railway.app/logout`,
+                    {
+                      mode: "cors",
+                    }
+                  ).then(function () {
+                    localStorage.clear();
+                    handleChange();
+                  });
+                }}
+                color="inherit"
+                sx={{ textAlign: "center" }}
+              >
+                Log Out
+              </Button>
             </Box>
           )}
         </Toolbar>

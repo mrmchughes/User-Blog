@@ -9,6 +9,11 @@ import "./styles/global.css";
 
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [auth, setAuth] = useState(false);
+
+  const handleChange = () => {
+    setAuth((prevAuth) => !prevAuth);
+  };
 
   interface Post {
     _id: string;
@@ -33,10 +38,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar auth={auth} handleChange={handleChange} />
       <Routes>
         <Route path="/" element={<HomePage posts={posts} />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/login"
+          element={<LoginPage auth={auth} handleChange={handleChange} />}
+        />
         <Route path="/signup" element={<SignUpPage />} />
 
         <Route path="/posts/:id" element={<PostPage />} />

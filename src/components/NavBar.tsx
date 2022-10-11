@@ -12,7 +12,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
 import { Link as RouterLink } from "react-router-dom";
 
 interface NavBarProps {

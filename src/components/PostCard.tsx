@@ -22,10 +22,10 @@ interface PostCardProps {
 
 const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Box sx={{ minWidth: 275 }}>
+    <Box sx={{ width: 300, height: 300 }}>
       <Card variant="outlined">
-        <CardContent sx={{ justify: "center", alignItems: "center" }}>
-          <Typography variant="h5" component="div">
+        <CardContent sx={{ textAlign: "center" }}>
+          <Typography variant="h5" component="div" noWrap>
             {post.title}
           </Typography>
 
@@ -38,9 +38,11 @@ const PostCard = ({ post }: PostCardProps) => {
           <Typography variant="body2">{post.timestamp}</Typography>
 
           <CardActions>
-            <Button variant="contained" href={`posts/${post._id}`}>
-              View Post
-            </Button>
+            <Box sx={{ margin: "0 auto", display: "flex" }}>
+              <Button variant="contained" href={`posts/${post._id}`}>
+                View Post
+              </Button>
+            </Box>
           </CardActions>
         </CardContent>
       </Card>

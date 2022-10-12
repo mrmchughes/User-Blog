@@ -27,13 +27,17 @@ const HomePage = ({ posts }: HomePageProps) => {
       </div>
 
       <Box sx={{ flexGrow: 1 }}>
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
+        <Grid container spacing={2}>
           {posts.map((post) => (
-            <Grid xs={2} sm={4} md={4} key={post._id}>
+            <Grid
+              xs={12}
+              sm={6}
+              md={3}
+              key={post._id}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
               <PostCard post={post} />
             </Grid>
           ))}

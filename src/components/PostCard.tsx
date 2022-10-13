@@ -22,7 +22,7 @@ interface PostCardProps {
 
 const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Box sx={{ width: 300, height: 200, boxShadow: 3 }}>
+    <Box sx={{ width: 200, height: 200, boxShadow: 3 }}>
       <Card variant="outlined">
         <CardContent sx={{ textAlign: "center" }}>
           <Typography variant="h5" component="div" noWrap>

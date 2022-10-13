@@ -50,12 +50,12 @@ const HomePage = ({ posts }: HomePageProps) => {
       </ThemeProvider>
 
       <Box sx={{ flexGrow: 1, m: 5 }}>
-        <Grid container spacing={3}>
+        <Grid container spacing={2.5}>
           {posts.map((post) => (
             <Grid
               xs={12}
               sm={6}
-              md={4}
+              md={3}
               key={post._id}
               display="flex"
               justifyContent="center"

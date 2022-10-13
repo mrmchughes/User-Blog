@@ -5,6 +5,7 @@ import LoginPage from "./components/LoginPage";
 import SignUpPage from "./components/SignUpPage";
 import NavBar from "./components/NavBar";
 import PostPage from "./components/PostPage";
+import PostCreatePage from "./components/PostCreatePage";
 import "./styles/global.css";
 
 function App() {
@@ -46,8 +47,8 @@ function App() {
           element={<LoginPage auth={auth} handleChange={handleChange} />}
         />
         <Route path="/signup" element={<SignUpPage />} />
-
         <Route path="/posts/:id" element={<PostPage />} />
+        <Route path="/createPost" element={<PostCreatePage />} />
         <Route path="*" element={<p> There is nothing here!!</p>} />
       </Routes>
     </BrowserRouter>

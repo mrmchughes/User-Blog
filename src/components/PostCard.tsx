@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Link as RouterLink } from "react-router-dom";
 
 interface Post {
   _id: string;
@@ -22,7 +23,7 @@ interface PostCardProps {
 
 const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Box sx={{ width: 200, height: 200, boxShadow: 3 }}>
+    <Box sx={{ width: 250, height: 200, boxShadow: 3 }}>
       <Card variant="outlined">
         <CardContent sx={{ textAlign: "center" }}>
           <Typography variant="h5" component="div" noWrap>
@@ -39,7 +40,11 @@ const PostCard = ({ post }: PostCardProps) => {
 
           <CardActions>
             <Box sx={{ margin: "0 auto", display: "flex" }}>
-              <Button variant="contained" href={`posts/${post._id}`}>
+              <Button
+                variant="contained"
+                component={RouterLink}
+                to={`posts/${post._id}`}
+              >
                 View Post
               </Button>
             </Box>

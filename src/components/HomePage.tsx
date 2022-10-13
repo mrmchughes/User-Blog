@@ -34,13 +34,20 @@ const HomePage = ({ posts }: HomePageProps) => {
   return (
     <Box component="main">
       <ThemeProvider theme={theme}>
-        <Box sx={{ boxShadow: 3, width: "100%", mb: 5, p: 5 }}>
+        <Box
+          sx={{
+            boxShadow: 3,
+            width: "100%",
+            mb: 5,
+            p: 5,
+            display: { xs: "none", sm: "block" },
+          }}
+        >
           <Typography
             variant="h3"
             component="div"
             sx={{
               flexGrow: 1,
-              display: { xs: "none", sm: "block" },
               textAlign: "center",
             }}
           >
@@ -50,12 +57,13 @@ const HomePage = ({ posts }: HomePageProps) => {
       </ThemeProvider>
 
       <Box sx={{ flexGrow: 1, m: 5 }}>
-        <Grid container spacing={2.5}>
+        <Grid container spacing={3}>
           {posts.map((post) => (
             <Grid
               xs={12}
               sm={6}
-              md={3}
+              md={4}
+              lg={3}
               key={post._id}
               display="flex"
               justifyContent="center"

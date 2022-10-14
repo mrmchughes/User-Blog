@@ -1,4 +1,8 @@
 import React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 
 interface Comment {
   post: Object;
@@ -13,12 +17,16 @@ interface CommentBoxProps {
 
 const CommentBox = ({ comment }: CommentBoxProps) => {
   return (
-    <div>
-      <p>
-        Sent by {comment.user} at: {comment.timestamp}
-      </p>
-      <p>{comment.message}</p>
-    </div>
+    <Box>
+      <Card variant="outlined" sx={{ boxShadow: 3, mb: 2.5, p: 2.5 }}>
+        <CardContent sx={{ textAlign: "center" }}>
+          <Typography variant="body2">
+            {comment.user} at: {comment.timestamp}
+          </Typography>
+          <Typography variant="body2">{comment.message}</Typography>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 

@@ -32,7 +32,7 @@ interface HomePageProps {
 
 const HomePage = ({ posts }: HomePageProps) => {
   return (
-    <Box component="main">
+    <Box>
       <ThemeProvider theme={theme}>
         <Box
           sx={{

@@ -4,6 +4,8 @@ import CommentBox from "../components/CommentBox";
 import { useForm } from "react-hook-form";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 interface Post {
   _id: string;
@@ -107,48 +109,76 @@ const PostPage = () => {
 
   return (
     <div>
-      <div>
-        <h1>{post.title}</h1>
-        <h2>{post.user}</h2>
-        <p>{post.timestamp}</p>
-        <p>{post.message}</p>
-      </div>
+      <Box sx={{ m: 5 }}>
+        <Typography sx={{ textAlign: "center" }}>{post.title}</Typography>
+        <Typography sx={{ textAlign: "center" }}>
+          Published by {post.user} on {post.timestamp}
+        </Typography>
+        <Typography sx={{ textAlign: "center" }}>{post.message}</Typography>
+      </Box>
+
       <br />
 
-      <div>
-        <h2>Comments:</h2>
-        {comments.map((comment, index) => (
-          <CommentBox key={index} comment={comment} />
-        ))}
-      </div>
-      <br />
+      <Box>
+        <Typography sx={{ textAlign: "center", m: 2.5 }}>Comments:</Typography>
 
-      <form>
-        <TextField
-          label="Message"
-          multiline
-          rows={4}
-          placeholder="Message"
-          {...register("message", {
-            required: true,
-            maxLength: 280,
-          })}
-        />
-        {errors.message?.type === "required" && (
-          <span role="alert">Please enter a message</span>
-        )}
-        {errors.message?.type === "maxLength" && (
-          <span role="alert">Message can only be up to 280 characters</span>
-        )}
-
-        <Button
-          variant="contained"
-          type="submit"
-          onClick={handleSubmit(onSubmit)}
+        <Box
+          sx={{
+            flexGrow: 1,
+            width: "50%",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
-          Submit Comment
-        </Button>
-      </form>
+          {comments.map((comment, index) => (
+            <CommentBox key={index} comment={comment} />
+          ))}
+        </Box>
+      </Box>
+
+      <br />
+
+      <Box
+        sx={{
+          flexGrow: 1,
+          width: "50%",
+          margin: "0 auto",
+        }}
+      >
+        <Typography sx={{ textAlign: "center", m: 2.5 }}>
+          Add a comment:
+        </Typography>
+        <form>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <TextField
+              label="Comment"
+              multiline
+              rows={4}
+              placeholder="Comment"
+              {...register("message", {
+                required: true,
+                maxLength: 280,
+              })}
+            />
+            {errors.message?.type === "required" && (
+              <span role="alert">Please enter a message</span>
+            )}
+            {errors.message?.type === "maxLength" && (
+              <span role="alert">Message can only be up to 280 characters</span>
+            )}
+
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={handleSubmit(onSubmit)}
+              sx={{ m: 2 }}
+            >
+              Submit Comment
+            </Button>
+          </Box>
+        </form>
+      </Box>
     </div>
   );
 };

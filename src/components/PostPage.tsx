@@ -6,6 +6,12 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
+import Divider from "@mui/material/Divider";
 
 interface Post {
   _id: string;
@@ -22,6 +28,10 @@ interface Comment {
   timestamp: String;
   message: String;
 }
+
+let theme = createTheme();
+
+theme = responsiveFontSizes(theme);
 
 const PostPage = () => {
   const [post, setPost] = useState<Post>({
@@ -110,25 +120,39 @@ const PostPage = () => {
   return (
     <div>
       <Box sx={{ m: 5 }}>
-        <Typography sx={{ textAlign: "center" }}>{post.title}</Typography>
-        <Typography sx={{ textAlign: "center" }}>
-          Published by {post.user} on {post.timestamp}
-        </Typography>
-        <Typography sx={{ textAlign: "center" }}>{post.message}</Typography>
+        <ThemeProvider theme={theme}>
+          <Typography variant="h4" sx={{ textAlign: "center" }}>
+            {post.title}
+          </Typography>
+          <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
+            Published by {post.user} on {post.timestamp}
+          </Typography>
+          <Divider></Divider>
+
+          <br />
+
+          <Typography variant="body1" sx={{ textAlign: "left" }}>
+            {post.message}
+          </Typography>
+
+          <br />
+
+          <Divider></Divider>
+        </ThemeProvider>
       </Box>
 
       <br />
 
       <Box>
-        <Typography sx={{ textAlign: "center", m: 2.5 }}>Comments:</Typography>
+        <ThemeProvider theme={theme}>
+          <Typography variant="h5" sx={{ textAlign: "left", m: 2 }}>
+            Comments: ({comments.length})
+          </Typography>
+        </ThemeProvider>
 
         <Box
           sx={{
-            flexGrow: 1,
-            width: "50%",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
+            margin: 2,
           }}
         >
           {comments.map((comment, index) => (
@@ -146,9 +170,11 @@ const PostPage = () => {
           margin: "0 auto",
         }}
       >
-        <Typography sx={{ textAlign: "center", m: 2.5 }}>
-          Add a comment:
-        </Typography>
+        <ThemeProvider theme={theme}>
+          <Typography variant="h5" sx={{ textAlign: "center", m: 2.5 }}>
+            Add a comment:
+          </Typography>
+        </ThemeProvider>
         <form>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <TextField

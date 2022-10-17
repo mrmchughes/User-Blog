@@ -12,7 +12,16 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
+
+let theme = createTheme();
+
+theme = responsiveFontSizes(theme);
 
 interface NavBarProps {
   auth: boolean;
@@ -108,70 +117,77 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            Blog Title Here
-          </Typography>
-          {!auth && (
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Button
-                component={RouterLink}
-                to="/"
-                color="inherit"
-                sx={{ textAlign: "center" }}
-              >
-                Home
-              </Button>
-              <Button
-                component={RouterLink}
-                to="/signup"
-                color="inherit"
-                sx={{ textAlign: "center" }}
-              >
-                Sign Up
-              </Button>
-              <Button
-                component={RouterLink}
-                to="/login"
-                color="inherit"
-                sx={{ textAlign: "center" }}
-              >
-                Log In
-              </Button>
-            </Box>
-          )}
-          {auth && (
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Button
-                component={RouterLink}
-                to="/"
-                color="inherit"
-                sx={{ textAlign: "center" }}
-              >
-                Home
-              </Button>
-              <Button
-                onClick={() => {
-                  fetch(
-                    `https://rest-api-for-blog-production.up.railway.app/logout`,
-                    {
-                      mode: "cors",
-                    }
-                  ).then(function () {
-                    localStorage.clear();
-                    handleChange();
-                  });
-                }}
-                color="inherit"
-                sx={{ textAlign: "center" }}
-              >
-                Log Out
-              </Button>
-            </Box>
-          )}
+          <ThemeProvider theme={theme}>
+            <Typography
+              variant="h5"
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            >
+              Blog Title Here
+            </Typography>
+            {!auth && (
+              <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                <Button
+                  component={RouterLink}
+                  to="/"
+                  color="inherit"
+                  sx={{ textAlign: "center" }}
+                  size="large"
+                >
+                  Home
+                </Button>
+                <Button
+                  component={RouterLink}
+                  to="/signup"
+                  color="inherit"
+                  sx={{ textAlign: "center" }}
+                  size="large"
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  component={RouterLink}
+                  to="/login"
+                  color="inherit"
+                  sx={{ textAlign: "center" }}
+                  size="large"
+                >
+                  Log In
+                </Button>
+              </Box>
+            )}
+            {auth && (
+              <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                <Button
+                  component={RouterLink}
+                  to="/"
+                  color="inherit"
+                  sx={{ textAlign: "center" }}
+                  size="large"
+                >
+                  Home
+                </Button>
+                <Button
+                  onClick={() => {
+                    fetch(
+                      `https://rest-api-for-blog-production.up.railway.app/logout`,
+                      {
+                        mode: "cors",
+                      }
+                    ).then(function () {
+                      localStorage.clear();
+                      handleChange();
+                    });
+                  }}
+                  color="inherit"
+                  sx={{ textAlign: "center" }}
+                  size="large"
+                >
+                  Log Out
+                </Button>
+              </Box>
+            )}
+          </ThemeProvider>
         </Toolbar>
       </AppBar>
       <Box component="nav">

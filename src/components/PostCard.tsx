@@ -5,8 +5,18 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { Link as RouterLink } from "react-router-dom";
+
+let theme = createTheme();
+
+theme = responsiveFontSizes(theme);
 
 interface Post {
   _id: string;
@@ -26,17 +36,27 @@ const PostCard = ({ post }: PostCardProps) => {
     <Box sx={{ width: 250, height: 200, boxShadow: 3 }}>
       <Card variant="outlined">
         <CardContent sx={{ textAlign: "center" }}>
-          <Typography variant="h5" component="div" noWrap>
-            {post.title}
-          </Typography>
+          <ThemeProvider theme={theme}>
+            <Typography variant="h5" component="div" noWrap>
+              {post.title}
+            </Typography>
 
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {post.user}
-          </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              {post.user}
+            </Typography>
 
-          <br />
+            <Box display="flex" justifyContent="center">
+              <Avatar
+                alt="Profile Picture"
+                src={require("../imgs/profile_image.png")}
+                sx={{ width: 56, height: 56 }}
+              />
+            </Box>
 
-          <Typography variant="body2">{post.timestamp}</Typography>
+            <br />
+
+            <Typography variant="body2">{post.timestamp}</Typography>
+          </ThemeProvider>
 
           <CardActions>
             <Box sx={{ margin: "0 auto", display: "flex" }}>

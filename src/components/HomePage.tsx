@@ -2,20 +2,16 @@ import React from "react";
 import PostCard from "../components/PostCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
-const theme = createTheme();
+let theme = createTheme();
 
-theme.typography.h3 = {
-  fontSize: "1.2rem",
-  "@media (min-width:600px)": {
-    fontSize: "1.5rem",
-  },
-  [theme.breakpoints.up("md")]: {
-    fontSize: "2rem",
-  },
-};
+theme = responsiveFontSizes(theme);
 
 interface Post {
   _id: string;
@@ -44,7 +40,7 @@ const HomePage = ({ posts }: HomePageProps) => {
           }}
         >
           <Typography
-            variant="h3"
+            variant="h4"
             component="div"
             sx={{
               flexGrow: 1,

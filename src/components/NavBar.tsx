@@ -76,29 +76,33 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
       )}
       {auth && (
         <List>
-          <ListItemButton
-            component={RouterLink}
-            to="/"
-            sx={{ textAlign: "center" }}
-          >
-            Home
-          </ListItemButton>
-          <ListItemButton
-            onClick={() => {
-              fetch(
-                `https://rest-api-for-blog-production.up.railway.app/logout`,
-                {
-                  mode: "cors",
-                }
-              ).then(function () {
-                localStorage.clear();
-                handleChange();
-              });
-            }}
-            sx={{ textAlign: "center" }}
-          >
-            Log Out
-          </ListItemButton>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={RouterLink}
+              to="/"
+              sx={{ textAlign: "center" }}
+            >
+              <ListItemText primary="Home" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              onClick={() => {
+                fetch(
+                  `https://rest-api-for-blog-production.up.railway.app/logout`,
+                  {
+                    mode: "cors",
+                  }
+                ).then(function () {
+                  localStorage.clear();
+                  handleChange();
+                });
+              }}
+              sx={{ textAlign: "center" }}
+            >
+              <ListItemText primary="Log Out" />
+            </ListItemButton>
+          </ListItem>
         </List>
       )}
     </Box>

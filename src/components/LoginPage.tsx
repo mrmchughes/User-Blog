@@ -1,6 +1,19 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
+
+let theme = createTheme();
+
+theme = responsiveFontSizes(theme);
 
 interface LoginPageProps {
   auth: boolean;
@@ -49,23 +62,51 @@ const LoginPage = ({ auth, handleChange }: LoginPageProps) => {
   }, [formState, reset]);
 
   return (
-    <div>
-      <h2>Log In</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          placeholder="username"
-          {...register("username", { required: true })}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          {...register("password", { required: true })}
-        />
+    <Box
+      sx={{
+        flexGrow: 1,
+        width: "50%",
+        margin: "0 auto",
+      }}
+    >
+      <ThemeProvider theme={theme}>
+        <Typography variant="h2" sx={{ textAlign: "center", m: 2.5 }}>
+          Log In
+        </Typography>
 
-        <input type="submit" />
-      </form>
-    </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <TextField
+              label="Username"
+              placeholder="Username"
+              sx={{ m: 2 }}
+              {...register("username", {
+                required: true,
+              })}
+            />
+
+            <TextField
+              label="Password"
+              placeholder="Password"
+              sx={{ m: 2 }}
+              type="password"
+              {...register("password", {
+                required: true,
+              })}
+            />
+
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={handleSubmit(onSubmit)}
+              sx={{ m: 2 }}
+            >
+              Log In
+            </Button>
+          </Box>
+        </form>
+      </ThemeProvider>
+    </Box>
   );
 };
 

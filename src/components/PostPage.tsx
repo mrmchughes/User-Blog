@@ -13,6 +13,19 @@ import {
 } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 
+import {
+  RegExpMatcher,
+  TextCensor,
+  englishDataset,
+  englishRecommendedTransformers,
+} from "obscenity";
+
+const matcher = new RegExpMatcher({
+  ...englishDataset.build(),
+  ...englishRecommendedTransformers,
+});
+const censor = new TextCensor();
+
 interface Post {
   _id: string;
   isPublished: boolean;
@@ -91,6 +104,14 @@ const PostPage = () => {
   } = useForm({ defaultValues: { username: "", message: "" } });
 
   const onSubmit = (data: any) => {
+    const input = data.message;
+    const matches = matcher.getAllMatches(input);
+
+    const censoredMessage = censor.applyTo(input, matches);
+
+    data.message = censoredMessage;
+    console.log(data.message);
+
     setComments([...comments, data]);
 
     const token = localStorage.getItem("token");

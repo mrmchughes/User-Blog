@@ -38,7 +38,7 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Blog Title Here
+        Whose Blog is this anyway?
       </Typography>
       <Divider />
       {!auth && (
@@ -50,6 +50,16 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
               sx={{ textAlign: "center" }}
             >
               <ListItemText primary="Home" />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem disablePadding>
+            <ListItemButton
+              component={RouterLink}
+              to="/about"
+              sx={{ textAlign: "center" }}
+            >
+              <ListItemText primary="about" />
             </ListItemButton>
           </ListItem>
 
@@ -85,6 +95,17 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
               <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
+
+          <ListItem disablePadding>
+            <ListItemButton
+              component={RouterLink}
+              to="/about"
+              sx={{ textAlign: "center" }}
+            >
+              <ListItemText primary="about" />
+            </ListItemButton>
+          </ListItem>
+
           <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
@@ -127,7 +148,7 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              Blog Title Here
+              Whose Blog is this anyway?
             </Typography>
             {!auth && (
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
@@ -140,6 +161,17 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
                 >
                   Home
                 </Button>
+
+                <Button
+                  component={RouterLink}
+                  to="/about"
+                  color="inherit"
+                  sx={{ textAlign: "center" }}
+                  size="large"
+                >
+                  About
+                </Button>
+
                 <Button
                   component={RouterLink}
                   to="/signup"
@@ -171,6 +203,17 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
                 >
                   Home
                 </Button>
+
+                <Button
+                  component={RouterLink}
+                  to="/about"
+                  color="inherit"
+                  sx={{ textAlign: "center" }}
+                  size="large"
+                >
+                  About
+                </Button>
+
                 <Button
                   onClick={() => {
                     fetch(

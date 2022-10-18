@@ -127,7 +127,7 @@ const PostPage = () => {
           <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
             Published by {post.user} on {post.timestamp}
           </Typography>
-          <Divider></Divider>
+          <Divider />
 
           <br />
 
@@ -137,7 +137,7 @@ const PostPage = () => {
 
           <br />
 
-          <Divider></Divider>
+          <Divider />
         </ThemeProvider>
       </Box>
 

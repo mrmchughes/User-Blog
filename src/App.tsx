@@ -5,6 +5,7 @@ import LoginPage from "./components/LoginPage";
 import SignUpPage from "./components/SignUpPage";
 import NavBar from "./components/NavBar";
 import PostPage from "./components/PostPage";
+import AboutPage from "./components/AboutPage";
 import PostCreatePage from "./components/PostCreatePage";
 import "./styles/global.css";
 
@@ -46,6 +47,7 @@ function App() {
           path="/login"
           element={<LoginPage auth={auth} handleChange={handleChange} />}
         />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/posts/:id" element={<PostPage />} />
         <Route path="/createPost" element={<PostCreatePage />} />

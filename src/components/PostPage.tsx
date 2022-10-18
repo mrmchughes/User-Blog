@@ -110,7 +110,6 @@ const PostPage = () => {
     const censoredMessage = censor.applyTo(input, matches);
 
     data.message = censoredMessage;
-    console.log(data.message);
 
     setComments([...comments, data]);
 

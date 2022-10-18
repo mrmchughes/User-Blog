@@ -34,8 +34,6 @@ const LoginPage = ({ auth, handleChange }: LoginPageProps) => {
   });
 
   const onSubmit = (data: any) => {
-    console.log(data);
-
     fetch("https://rest-api-for-blog-production.up.railway.app/login", {
       method: "POST",
       body: JSON.stringify(data),
@@ -50,7 +48,6 @@ const LoginPage = ({ auth, handleChange }: LoginPageProps) => {
       .then(function (response) {
         localStorage.setItem("token", response.token);
         handleChange();
-        console.log(localStorage.getItem("token"));
       });
   };
 

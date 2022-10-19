@@ -1,4 +1,17 @@
 import React from "react";
+import PostCard from "../components/PostCard";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Unstable_Grid2";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+
+let theme = createTheme();
+
+theme = responsiveFontSizes(theme);
 
 interface Post {
   _id: string;
@@ -15,23 +28,49 @@ interface HomePageProps {
 
 const HomePage = ({ posts }: HomePageProps) => {
   return (
-    <div>
-      <div>
-        <p>I'm Michael, welcome to my Blog!</p>
-        <p>
-          Here is some more filler text that explains what my blog is all about.
-        </p>
-      </div>
-      <div>
-        {posts.map((post) => {
-          return (
-            <div key={post._id}>
-              <p>{post.title}</p>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <Box>
+      <ThemeProvider theme={theme}>
+        <Box
+          sx={{
+            boxShadow: 3,
+            width: "100%",
+            mb: 5,
+            p: 5,
+            display: { xs: "none", sm: "block" },
+          }}
+        >
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              textAlign: "center",
+            }}
+          >
+            Hello World! I'm Michael, and welcome to my Blog!
+          </Typography>
+        </Box>
+      </ThemeProvider>
+
+      <Box sx={{ flexGrow: 1, m: 5 }}>
+        <Grid container spacing={3}>
+          {posts.map((post) => (
+            <Grid
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              key={post._id}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <PostCard post={post} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Box>
   );
 };
 

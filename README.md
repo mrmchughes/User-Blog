@@ -1,9 +1,13 @@
 # User-Blog
 
 I developed this Blog as part of The Odin Project's Fullstack [curriculum](https://www.theodinproject.com/lessons/nodejs-blog-api).
-TBuilding an entire blogging site from the ground up has been a fantastic way to test my Full Stack Web Development skills! I'm quite pleased that I managed to get a profanity filter working.
+Building an entire blogging site from the ground up has been a fantastic way to test my Full Stack Web Development skills! I'm quite pleased that I managed to get a profanity filter working.
 
-[Live Demo](https://calm-ravine-70177.herokuapp.com/)
+[Live User Front End](https://calm-ravine-70177.herokuapp.com/)
+
+[CMS Front End Repo](https://github.com/mrmchughes/CMS-Blog) 
+
+[API Repo](https://github.com/mrmchughes/REST-API-for-Blog)
 
 ## Screenshots
 [Home Page] ![image](https://user-images.githubusercontent.com/10659805/196775327-9ff7bd6a-7f1e-4319-b21c-6c1011a12bb8.png)

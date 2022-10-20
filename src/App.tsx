@@ -6,7 +6,6 @@ import SignUpPage from "./components/SignUpPage";
 import NavBar from "./components/NavBar";
 import PostPage from "./components/PostPage";
 import AboutPage from "./components/AboutPage";
-import PostCreatePage from "./components/PostCreatePage";
 import "./styles/global.css";
 
 function App() {
@@ -50,7 +49,6 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/posts/:id" element={<PostPage />} />
-        <Route path="/createPostPage" element={<PostCreatePage />} />
         <Route path="*" element={<p> There is nothing here!!</p>} />
       </Routes>
     </BrowserRouter>

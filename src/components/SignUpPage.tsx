@@ -31,7 +31,7 @@ const SignUpPage = () => {
   });
 
   const onSubmit = (data: any) => {
-    fetch("https://rest-api-for-blog-production.up.railway.app/signup", {
+    fetch("https://rest-api-for-blog.onrender.com/signup", {
       method: "post",
       body: JSON.stringify(data),
       headers: {

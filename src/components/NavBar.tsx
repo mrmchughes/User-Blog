@@ -109,12 +109,9 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
           <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
-                fetch(
-                  `https://rest-api-for-blog-production.up.railway.app/logout`,
-                  {
-                    mode: "cors",
-                  }
-                ).then(function () {
+                fetch(`https://rest-api-for-blog.onrender.com/logout`, {
+                  mode: "cors",
+                }).then(function () {
                   localStorage.clear();
                   handleChange();
                 });
@@ -216,12 +213,9 @@ const NavBar = ({ auth, handleChange }: NavBarProps) => {
 
                 <Button
                   onClick={() => {
-                    fetch(
-                      `https://rest-api-for-blog-production.up.railway.app/logout`,
-                      {
-                        mode: "cors",
-                      }
-                    ).then(function () {
+                    fetch(`https://rest-api-for-blog.onrender.com/logout`, {
+                      mode: "cors",
+                    }).then(function () {
                       localStorage.clear();
                       handleChange();
                     });

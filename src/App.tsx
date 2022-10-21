@@ -26,7 +26,7 @@ function App() {
   }
 
   useEffect(() => {
-    fetch("https://rest-api-for-blog-production.up.railway.app/posts", {
+    fetch("https://rest-api-for-blog.onrender.com/posts", {
       mode: "cors",
     })
       .then(function (response) {

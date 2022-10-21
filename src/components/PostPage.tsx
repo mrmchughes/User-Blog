@@ -67,7 +67,7 @@ const PostPage = () => {
   }, [comments]);
 
   const fetchedPost = () => {
-    fetch(`https://rest-api-for-blog-production.up.railway.app/posts/${id}`, {
+    fetch(`https://rest-api-for-blog.onrender.com/posts/${id}`, {
       mode: "cors",
     })
       .then(function (response) {
@@ -79,12 +79,9 @@ const PostPage = () => {
   };
 
   const fetchedComments = () => {
-    fetch(
-      `https://rest-api-for-blog-production.up.railway.app/posts/${id}/comments`,
-      {
-        mode: "cors",
-      }
-    )
+    fetch(`https://rest-api-for-blog.onrender.com/posts/${id}/comments`, {
+      mode: "cors",
+    })
       .then(function (response) {
         return response.json();
       })
@@ -118,17 +115,14 @@ const PostPage = () => {
 
     const newComment = JSON.stringify(data);
 
-    fetch(
-      `https://rest-api-for-blog-production.up.railway.app/posts/${id}/comments`,
-      {
-        method: "post",
-        body: newComment,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: bearer,
-        },
-      }
-    );
+    fetch(`https://rest-api-for-blog.onrender.com/posts/${id}/comments`, {
+      method: "post",
+      body: newComment,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: bearer,
+      },
+    });
   };
 
   useEffect(() => {

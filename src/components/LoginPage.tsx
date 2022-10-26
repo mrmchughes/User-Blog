@@ -34,7 +34,7 @@ const LoginPage = ({ auth, handleChange }: LoginPageProps) => {
   });
 
   const onSubmit = (data: any) => {
-    fetch("https://rest-api-for-blog-production.up.railway.app/login", {
+    fetch("https://rest-api-for-blog.onrender.com/login", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
